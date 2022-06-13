@@ -1,6 +1,7 @@
 import { ArrowLeft } from 'phosphor-react';
 import React from 'react';
 import { FeedbackType, feedbackTypes } from ".."
+import { api } from '../../../services/api';
 import CloseButton from '../../CloseButton';
 import ScreenshotButton from '../../WidgetForm/ScreenshotButton';
 
@@ -20,11 +21,12 @@ const FeedbackContentStep = ({feedBackOption, onFeedbackRestartRequested, onFeed
       e.preventDefault();
 
       // Preparado para enviar os dados ao back-end
-      console.log({
+      const dataFeedback = {
         feedbackText: feedbackText,
         urlImageFeedback: screenshot
-      });
+      }
 
+      api.post('/feedbacks', dataFeedback);
       onFeedbackSent();
     }
 
