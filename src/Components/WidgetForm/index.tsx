@@ -3,7 +3,7 @@ import bugImageSrc from '../../assets/bug.svg';
 import ideaImageSrc from '../../assets/idea.svg';
 import otherImageSrc from '../../assets/other.svg';
 import FeedbackContentStep from './Steps/FeedbackContentStep';
-import FeedbackSuccessStep from './Steps/FeedbackSuccessStep';
+import FeedbackSuccessStep from './Steps/FeedbackStateStep';
 import FeedbackTypeStep from './Steps/FeedbackTypeStep';
 
 export const feedbackTypes = {
@@ -48,24 +48,24 @@ export type FeedbackType  = keyof typeof feedbackTypes ; /*"BUG" | "IDEA" | "OTH
 
 const WidgetForm = () => {
     const [feedbackOption, setFeedbackOption] = React.useState<FeedbackType  | null>(null);
-    const [feedbackSent, setFeedbackSent] = React.useState(false);
+    const [feedbackSent, setFeedbackSent] = React.useState<boolean | null>(null);
 
     const handleRestartFeedBack = () => {
         setFeedbackOption(null);
-        setFeedbackSent(false);
+        setFeedbackSent(null);
     };
 
     return (
         <div className="bg-zinc-900 p-4 relative rounded-2xl mb-4 flex flex-col items-center shadow-lg w-[calc(100vw-2rem)] md:w-auto">
-            {feedbackSent ? (
-                <FeedbackSuccessStep onFeedbackRestartRequested={handleRestartFeedBack}/>
+            {feedbackSent !== null ? (
+                <FeedbackSuccessStep feedbackSent={feedbackSent} onFeedbackRestartRequested={handleRestartFeedBack}/>
             ) : (
                 <>
                 {feedbackOption ? 
                 <FeedbackContentStep 
                     feedBackOption={feedbackOption} 
                     onFeedbackRestartRequested={handleRestartFeedBack}
-                    onFeedbackSent={() => setFeedbackSent(true)}
+                    onFeedbackSent={(state: boolean) => setFeedbackSent(true)}
                 /> : 
                 <FeedbackTypeStep onFeedbackOptionChanged={setFeedbackOption}/>}</>
             )}

@@ -9,7 +9,12 @@ import ScreenshotButton from '../../WidgetForm/ScreenshotButton';
 interface FeedbackContentProps {
     feedBackOption: FeedbackType;
     onFeedbackRestartRequested: () => void; 
-    onFeedbackSent: () => void;
+    onFeedbackSent: (state: boolean) => void;
+}
+
+interface DataFeedback {
+  feedbackText: string,
+  urlImageFeedback: string
 }
 
 const FeedbackContentStep = ({feedBackOption, onFeedbackRestartRequested, onFeedbackSent}: FeedbackContentProps) => {
@@ -17,17 +22,24 @@ const FeedbackContentStep = ({feedBackOption, onFeedbackRestartRequested, onFeed
     const [screenshot, setScreenshot] = React.useState<string| null>(null);
     const [feedbackText, setFeedbackText] = React.useState('');
 
-    const handleSubmitfeedback = (e: React.FormEvent) => {
+    const handleSubmitfeedback = async (e: React.FormEvent) => {
       e.preventDefault();
 
       // Preparado para enviar os dados ao back-end
+      // O ! é aplicado pois o botão de submit já verifica se tem uma imagem ou não
       const dataFeedback = {
         feedbackText: feedbackText,
-        urlImageFeedback: screenshot
+        urlImageFeedback: screenshot!
       }
 
-      api.post('/feedbacks', dataFeedback);
-      onFeedbackSent();
+      const response = await api.post('/feedbacks', dataFeedback);
+      
+      if(response.status === 201){
+        onFeedbackSent(true);
+      } else {
+        onFeedbackSent(false);
+      }
+      
     }
 
     return (

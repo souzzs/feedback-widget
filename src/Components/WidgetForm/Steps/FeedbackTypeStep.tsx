@@ -23,7 +23,7 @@ const FeedbackTypeStep = ({onFeedbackOptionChanged}: FeedbackTypeStepProps) => {
                                 border-transparent hover:border-brand-500 
                                 focus:border-brand-500 focus:outline-none'
                         >
-                            <img src={value.image.src} alt={value.image.alt}/>
+                            <img src={value.image.src} alt={value.image.alt} className='mx-auto mb-2'/>
                             <span>{value.title}</span>
                         </button>
                     );
