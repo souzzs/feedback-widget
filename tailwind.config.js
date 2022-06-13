@@ -5,13 +5,17 @@ module.exports = {
     extend: {
       colors: {
         brand: {
-          500: '#8257E5'
-        }
+          300: "#996dff",
+          500: "#8257E5",
+        },
       },
       fontFamily: {
-        sans: ['"Inter"']
-      }
+        sans: ['"Inter"'],
+      },
+      borderRadius: {
+        md: "4px",
+      },
     },
   },
-  plugins: [],
-}
+  plugins: [require("@tailwindcss/forms"), require("tailwind-scrollbar")],
+};
