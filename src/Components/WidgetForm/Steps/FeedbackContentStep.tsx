@@ -5,19 +5,22 @@ import { api } from '../../../services/api';
 import CloseButton from '../../CloseButton';
 import ScreenshotButton from '../../WidgetForm/ScreenshotButton';
 
+interface DataFeedback {
+  feedbackText: string;
+  urlImageFeedback: string;
+  typeFeedback: string;
+  imgFeedbackType: string;
+}
+
 // Mesmo um função se estado o seu retorno será void
 interface FeedbackContentProps {
-    feedBackOption: FeedbackType;
-    onFeedbackRestartRequested: () => void; 
-    onFeedbackSent: (state: boolean) => void;
+  feedBackOption: FeedbackType;
+  onFeedbackRestartRequested: () => void; 
+  onFeedbackSent: (state: boolean) => void;
+  updateListFeedbacks: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-interface DataFeedback {
-  feedbackText: string,
-  urlImageFeedback: string
-}
-
-const FeedbackContentStep = ({feedBackOption, onFeedbackRestartRequested, onFeedbackSent}: FeedbackContentProps) => {
+const FeedbackContentStep = ({feedBackOption, onFeedbackRestartRequested, onFeedbackSent, updateListFeedbacks}: FeedbackContentProps) => {
     const {title, image} = feedbackTypes[feedBackOption];
     const [screenshot, setScreenshot] = React.useState<string| null>(null);
     const [feedbackText, setFeedbackText] = React.useState('');
@@ -27,14 +30,17 @@ const FeedbackContentStep = ({feedBackOption, onFeedbackRestartRequested, onFeed
 
       // Preparado para enviar os dados ao back-end
       // O ! é aplicado pois o botão de submit já verifica se tem uma imagem ou não
-      const dataFeedback = {
+      const dataFeedback: DataFeedback = {
         feedbackText: feedbackText,
-        urlImageFeedback: screenshot!
+        urlImageFeedback: screenshot!,
+        typeFeedback: title,
+        imgFeedbackType: image.src
       }
-
+      
       const response = await api.post('/feedbacks', dataFeedback);
       
       if(response.status === 201){
+        updateListFeedbacks((feedbacksPrevious) => !feedbacksPrevious);
         onFeedbackSent(true);
       } else {
         onFeedbackSent(false);

@@ -46,7 +46,11 @@ Object.entries(feedbackTypes ) =>
 // Captura as chaves das opções de feedback e utiliza para gerar um type único
 export type FeedbackType  = keyof typeof feedbackTypes ; /*"BUG" | "IDEA" | "OTHER"*/
 
-const WidgetForm = () => {
+interface WidgetProps {
+    updateListFeedbacks: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const WidgetForm = ({updateListFeedbacks}: WidgetProps) => {
     const [feedbackOption, setFeedbackOption] = React.useState<FeedbackType  | null>(null);
     const [feedbackSent, setFeedbackSent] = React.useState<boolean | null>(null);
 
@@ -63,7 +67,8 @@ const WidgetForm = () => {
                 <>
                 {feedbackOption ? 
                 <FeedbackContentStep 
-                    feedBackOption={feedbackOption} 
+                    feedBackOption={feedbackOption}
+                    updateListFeedbacks={updateListFeedbacks} 
                     onFeedbackRestartRequested={handleRestartFeedBack}
                     onFeedbackSent={(state: boolean) => setFeedbackSent(true)}
                 /> : 
