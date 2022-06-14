@@ -62,7 +62,7 @@ const FeedbackContentStep = ({feedBackOption, onFeedbackRestartRequested, onFeed
           </header>
           <form className='my-4 w-full' onSubmit={handleSubmitfeedback}>
             <textarea 
-              className="min-w-[304px] w-full min-h-[112px] text-sm placeholder-zinc-400 text-zinc-100 border-zinc-600 bg-transparent rounded-md focus:border-brand-500 focus:ring-brand-500 focus:ring-1 focus:outline-none resize-none scrollbar-thumb-zinc-700 scrollbar-track-transparent scrollbar-thin"
+              className="min-w-[304px] w-full min-h-[112px] text-sm placeholder-zinc-400 dark:text-zinc-100 border-zinc-600 bg-transparent rounded-md focus:border-brand-500 focus:ring-brand-500 focus:ring-1 focus:outline-none resize-none scrollbar-thumb-zinc-700 scrollbar-track-transparent scrollbar-thin"
               placeholder='Conte com detalhes o que está acontecendo...'
               onChange={(e) => setFeedbackText(e.target.value)}
             />
@@ -71,7 +71,7 @@ const FeedbackContentStep = ({feedBackOption, onFeedbackRestartRequested, onFeed
               <button
               type='submit'
               disabled={screenshot ? false : true}
-              className="p-2 bg-brand-500 font-medium rounded-md border-transparent flex-1 flex justify-center items-center text-sm hover:bg-brand-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-900 focus:ring-brand-500 transition-colors disabled:opacity-50 disabled:hover:bg-brand-500"  
+              className="p-2 bg-brand-500 text-white font-medium rounded-md border-transparent flex-1 flex justify-center items-center text-sm hover:bg-brand-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-900 focus:ring-brand-500 transition-colors disabled:opacity-50 disabled:hover:bg-brand-500"  
               >
               Enviar feddback  
               </button>

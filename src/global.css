@@ -3,6 +3,10 @@
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap");
 
-body {
+html.dark{
   @apply bg-[#09090A] text-zinc-100;
+}
+
+html.light{
+  @apply bg-white text-[#27272A];
 }

@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.tsx"],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -11,6 +12,9 @@ module.exports = {
       },
       fontFamily: {
         sans: ['"Inter"'],
+      },
+      boxShadow: {
+        '4xl': '0px 8px 32px rgba(0, 0, 0, 0.15);'
       },
       borderRadius: {
         md: "4px",

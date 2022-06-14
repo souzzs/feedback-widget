@@ -39,7 +39,7 @@ const ScreenshotButton = ({onScreenshotTook, screenshot}: ScreenshotButtonProps)
       <button
           type='button'
           onClick={handleTakeScreenshot}
-          className='p-2 bg-zinc-800 rounded-md border-transparent hover:bg-zinc-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-900 focus:ring-brand-500 disabled:opacity-50 disabled:hover:bg-brand-500'
+          className='p-2 bg-[#F4F4F5] dark:bg-zinc-800 rounded-md border-transparent dark:hover:bg-zinc-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-900 focus:ring-brand-500 disabled:opacity-50 disabled:hover:bg-brand-500'
       >
           {isTakingScreenshot ? <Loading /> : <Camera className='w-6 h-6 text-zinc-900' />}
       </button>
